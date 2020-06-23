@@ -1,13 +1,28 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { FaGithubAlt, FaPlus, FaSpinner } from 'react-icons/fa';
-import { Container, Form, SubmitButton } from './styles';
+import { Link } from 'react-router-dom';
+import { Container, Form, SubmitButton, List } from './styles';
 import api from '../../services/api';
 
 export default function Main() {
     const [newRepo, setNewRepo] = useState('');
     const [repos, setRepos] = useState([]);
     const [loading, setLoading] = useState(false);
+
+    //Carregar dados do local storage
+    useEffect(() => {
+        const storageRepos = localStorage.getItem('repos');
+
+        if (storageRepos) {
+            setRepos(JSON.parse(storageRepos));
+        }
+    }, []);
+
+    //Salvar dados do local storage
+    useEffect(() => {
+        localStorage.setItem('repos', JSON.stringify(repos));
+    }, [repos]);
 
     function handleInputChange(event) {
         setNewRepo(event.target.value);
@@ -22,7 +37,7 @@ export default function Main() {
             name: response.data.full_name,
         };
 
-        setRepos(...repos, data);
+        setRepos([...repos, data]);
         setNewRepo('');
         setLoading(false);
     }
@@ -48,6 +63,19 @@ export default function Main() {
                     )}
                 </SubmitButton>
             </Form>
+
+            <List>
+                {repos.map((repo) => (
+                    <li key={repo.name}>
+                        <span>{repo.name}</span>
+                        <Link
+                            to={`/repository/${encodeURIComponent(repo.name)}`}
+                        >
+                            Detalhes
+                        </Link>
+                    </li>
+                ))}
+            </List>
         </Container>
     );
 }
