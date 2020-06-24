@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 
 import { FaGithubAlt, FaPlus, FaSpinner } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import { Container, Form, SubmitButton, List } from './styles';
+import Container from '../../components/Container';
+import { Form, SubmitButton, List } from './styles';
 import api from '../../services/api';
 
 export default function Main() {
@@ -10,7 +11,7 @@ export default function Main() {
     const [repos, setRepos] = useState([]);
     const [loading, setLoading] = useState(false);
 
-    //Carregar dados do local storage
+    // Carregar dados do local storage
     useEffect(() => {
         const storageRepos = localStorage.getItem('repos');
 
@@ -19,7 +20,7 @@ export default function Main() {
         }
     }, []);
 
-    //Salvar dados do local storage
+    // Salvar dados do local storage
     useEffect(() => {
         localStorage.setItem('repos', JSON.stringify(repos));
     }, [repos]);
