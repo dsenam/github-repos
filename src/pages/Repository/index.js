@@ -36,7 +36,7 @@ export default function Repository({ match }) {
     }, []);
 
     if (loading) {
-        return <Loading>Carregando</Loading>;
+        return <Loading>Carregando...</Loading>;
     }
 
     return (

@@ -29,6 +29,7 @@ export default function Main() {
         setNewRepo(event.target.value);
     }
 
+    // Adicionar repositórios
     async function handleSubmit(event) {
         event.preventDefault();
         setLoading(true);

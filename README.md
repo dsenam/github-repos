@@ -1,6 +1,6 @@
 ## Listagem de repositórios GITHUB
 
-Este projeto tem como finalidade listar informações de repositórios consumindo a API do Github.
+Este projeto tem como finalidade listar informações de repositórios consumindo a API do Github e salvando informações no localStorage.
 
 ### TECHS/LIBS
 
